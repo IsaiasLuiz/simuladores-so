@@ -1,13 +1,9 @@
 import React from 'react';
 
-import  './styles.css';
+import './styles.css';
 
- const header = ()=>{
-    return (
-        <div className="header">
-            Simuladores de SO
-        </div>
-    );
-}
+const header = () => {
+	return <div className="header">Simuladores de SO</div>;
+};
 
 export default header;
