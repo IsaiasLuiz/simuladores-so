@@ -1,4 +1,4 @@
-This project was designed by Professor André Tarallo in the discipline of Operating Systems at the IFSP campus araraquara. The work involves implementing process simulators in operating systems.
+This project was designed by Professor André Tarallo in the discipline of Operating Systems at the IFSP campus Araraquara. The work involves implementing process simulators in operating systems.
 
 When downloading the project run
 
