@@ -1,12 +1,12 @@
 import React from 'react';
 import Route from './routes';
 
-function App() {
+const App = props => {
 	return (
 		<>
-			<Route />
+			<Route props={props} />
 		</>
 	);
-}
+};
 
 export default App;
