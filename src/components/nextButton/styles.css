@@ -1,15 +1,15 @@
 .next-route {
-	text-decoration: none;
-	padding: 10px;
-	font-size: 1.3em;
-	width: 200px;
-	height: 50px;
-	background: rgb(22, 231, 22);
-	border-radius: 10px;
-	border: 1px solid #fff;
-	box-sizing: border-box;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin: auto;
+  text-decoration: none;
+  padding: 10px;
+  font-size: 1.3em;
+  width: 200px;
+  height: 50px;
+  background: rgb(22, 231, 22);
+  border-radius: 10px;
+  border: 1px solid #fff;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
 }
