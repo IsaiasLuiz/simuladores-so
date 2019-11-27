@@ -1,29 +1,13 @@
 import React from 'react';
 import NextButton from '../../components/nextButton';
-import styled from 'styled-components';
 import Algorithms from '../../constants/algorithms';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Container, Content, Title } from '../../styles/styledComponents';
-import defineAlgorithm from '../../actions';
-
-
-
-const Label = styled.label`
-  display: block;
-  border: 1px solid #123;
-  margin: 10px;
-  font-size: 1.2em;
-  cursor: pointer;
-
-  &:hover {
-    color: #df2f12;
-  }
-`;
+import { Container, Content, Title, Label } from '../../styles/styledComponents';
+import  defineAlgorithm from '../../actions/defineAlgorithm';
 
 const HomePage = props => {
   const { defineAlgorithm } = props;
-
   return (
     <Container>
       <Content>

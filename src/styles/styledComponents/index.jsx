@@ -19,4 +19,17 @@ const Title = styled.h1`
   display: block;
 `;
 
-export { Container, Content, Title };
+const Label = styled.label`
+  display: block;
+  border: 1px solid #123;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  cursor: pointer;
+
+  &:hover {
+    color: #df2f12;
+  }
+`;
+
+export { Container, Content, Title, Label };
