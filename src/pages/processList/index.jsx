@@ -1,12 +1,11 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import defineProcessType from '../../actions/defineProcessType';
-import ProcessType from '../../constants/processType'
+import React,{ Component } from 'react';
 import styled from 'styled-components';
+import ProcessTable from '../../components/processTable';
 import Next from '../../components/nextButton';
 import Button from '../../components/button';
 import { Container, Content, Title, Label } from '../../styles/styledComponents';
+import ProcessType from '../../constants/processType';
+import ProcessListDefault from '../../constants/processList';
 
 const Div = styled.div`
   width: 100%;
@@ -30,61 +29,104 @@ const divCss = {
   justifyContent: 'center'
 }
 
-const processList = props => {
-  const { defineProcessType } = props;
-  
-  return (
-    <Container>
-      <Content>
-        <Title>Configure a Lista de processos</Title>
-        <H3>Escolha o tipo de processo</H3>
-        <Label style={labelCss}>
-          <input
-            type='radio'
-            name='process-type'
-            defaultChecked
-            onChange={()=>defineProcessType(ProcessType.IO)}
-          />
-          IO
-        </Label>
-        <Label style={labelCss}>
-          <input
-            type='radio'
-            name='process-type'
-            onChange={()=>defineProcessType(ProcessType.CPU)}
-          />
-          CPU
-        </Label>
+  export default class ProcessList extends Component {
+    state = {
+      processName: '',
+      processType: ProcessType.IO,
+      processTime: '',
+      processPriority: '',
+      processList:[]
+    }
+    addProcess = ()=> {    
+      console.log(this.state.processList);
+        
+      const list = this.state.processList || [];
+      const process = {
+        processName: this.state.processName,
+        processType: this.state.processType,
+        processTime: this.state.processTime,
+        processPriority: this.state.processPriority
+      }
+      list.push(process);
+      this.setState({processList: list});
+      this.clearFields();
+    }
 
-        <Div>
-          <H3>Insira o nome do processo:</H3>
-          <Input type="text" placeholder="Nome do processo" />
-        </Div>
+    clearFields = () => {
+      this.setState({
+        processName: '',
+        processType: ProcessType.IO,
+        processTime: '',
+        processPriority: ''
+      });
+    };
 
-        <Div>
-          <H3>Insira o tempo em segundos:</H3>
-          <Input type="text" placeholder="Tempo em segundos" />
-        </Div>
+    processDefault = ()=> {
+      this.setState({processList: ProcessListDefault});
+    }
 
-        <Div>
-          <H3>Insira a Prioridade</H3>
-          <Input type="text" placeholder="Proridade" />
-        </Div>
+    render(){
+      return (
+        <Container>
+          <Content>
+            <Title>Configure a Lista de processos</Title>
+            <H3>Escolha o tipo de processo</H3>
+            <Label style={labelCss}>
+              <input
+                type='radio'
+                name='process-type'
+                defaultChecked
+                onChange={()=>this.setState({processType: ProcessType.IO})}
+              />
+              IO
+            </Label>
+            <Label style={labelCss}>
+              <input
+                type='radio'
+                name='process-type'
+                onChange={()=>this.setState({processType: ProcessType.CPU})}
+              />
+              CPU
+            </Label>
 
-        <Div style={divCss}>
-          <Button text="Usar lista sugerida" />
-          <Next route="" text="Executar" />
-        </Div>
-      </Content>
-    </Container>
-  )
-};
+            <Div>
+              <H3>Insira o nome do processo:</H3>
+              <Input type="text" placeholder="Nome do processo" 
+              value={this.state.processName}
+                onChange={(event)=>this.setState({processName: event.target.value})}
+              />
+            </Div>
 
-const mapStateToProps = store => ({
-  processType: store.type.processType
-});
+            <Div>
+              <H3>Insira o tempo em segundos:</H3>
+              <Input type="number" placeholder="Tempo em segundos" 
+              value={this.state.processTime}
+                onChange={(event)=>this.setState({processTime: event.target.value})}
+              />
+            </Div>
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ defineProcessType }, dispatch);
+            <Div>
+              <H3>Insira a Prioridade</H3>
+              <Input type="number" placeholder="Proridade" 
+              value={this.state.processPriority}
+                onChange={(event)=>this.setState({processPriority: event.target.value})}
+              />
+            </Div>
 
-export default connect(mapStateToProps, mapDispatchToProps)(processList);
+            <Div style={divCss}>
+              <Button text="Usar lista sugerida" click={this.processDefault}/>
+              <Button text="Adicionar" click={this.addProcess} />
+              <Next route="" text="Executar" />
+            </Div>
+          </Content>
+          <Content style={{'justifyContent': 'end', 'minWidth': '500px'}}>
+            <Div>
+              <H3>Lista de Processos:</H3>
+              <ProcessTable list={this.state.processList}/>
+            </Div>
+          </Content>
+      </Container>
+    )};
+  };
+
+

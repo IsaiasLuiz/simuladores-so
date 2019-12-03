@@ -20,7 +20,7 @@ const Btn = styled.button`
 `;
 
 const Button = props=>{
-    return <Btn>{ props.text }</Btn>
+    return <Btn onClick={props.click}>{ props.text }</Btn>
 }
 
 Button.prototype = {
