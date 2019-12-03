@@ -7,7 +7,7 @@ const Btn = styled.button`
     padding: 10px;
     font-size: 1.3em;
     height: 50px;
-    background: orange;
+    background: ${ props=>props.background || 'orange'};
     border-radius: 10px;
     border: 1px solid #fff;
     box-sizing: border-box;
@@ -19,12 +19,13 @@ const Btn = styled.button`
     cursor: pointer;
 `;
 
-const Button = props=>{
-    return <Btn onClick={props.click}>{ props.text }</Btn>
+const Button = props => {
+    return <Btn onClick={ props.click } background={ props.background } >{ props.text }</Btn>
 }
 
 Button.prototype = {
-    text: PropTypes.string.isRequired
+    text: PropTypes.string.isRequired,
+    background: PropTypes.string
 }
 
 export default Button;

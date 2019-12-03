@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import algorithmReducer from './AlgorithmReducer'
-import typeProcessreducer from './TypeProcessReducer'
+import ProcessListReducer from './ProcessListReducer'
 
 export const Reducers = combineReducers({
     algorithm: algorithmReducer,
-    type: typeProcessreducer
+    processList: ProcessListReducer
 });

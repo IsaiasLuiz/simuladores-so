@@ -1,4 +1,6 @@
 import React,{ Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
 import ProcessTable from '../../components/processTable';
 import Next from '../../components/nextButton';
@@ -6,6 +8,8 @@ import Button from '../../components/button';
 import { Container, Content, Title, Label } from '../../styles/styledComponents';
 import ProcessType from '../../constants/processType';
 import ProcessListDefault from '../../constants/processList';
+import  defineProcessList from '../../actions/defineProcessList';
+
 
 const Div = styled.div`
   width: 100%;
@@ -29,7 +33,7 @@ const divCss = {
   justifyContent: 'center'
 }
 
-  export default class ProcessList extends Component {
+class ProcessList extends Component {
     state = {
       processName: '',
       processType: ProcessType.IO,
@@ -37,9 +41,7 @@ const divCss = {
       processPriority: '',
       processList:[]
     }
-    addProcess = ()=> {    
-      console.log(this.state.processList);
-        
+    addProcess = ()=> {          
       const list = this.state.processList || [];
       const process = {
         processName: this.state.processName,
@@ -66,11 +68,12 @@ const divCss = {
     }
 
     render(){
+      const { defineProcessList } = this.props;      
       return (
         <Container>
           <Content>
             <Title>Configure a Lista de processos</Title>
-            <H3>Escolha o tipo de processo</H3>
+            <H3>Escolha o tipo de processo:</H3>
             <Label style={labelCss}>
               <input
                 type='radio'
@@ -116,7 +119,12 @@ const divCss = {
             <Div style={divCss}>
               <Button text="Usar lista sugerida" click={this.processDefault}/>
               <Button text="Adicionar" click={this.addProcess} />
-              <Next route="" text="Executar" />
+              <Button text="Finalizar" click={()=> {
+                defineProcessList(this.state.processList);
+                this.props.history.push('/simulation');
+              }} 
+              background={"rgb(22, 231, 22)"}
+                />
             </Div>
           </Content>
           <Content style={{'justifyContent': 'end', 'minWidth': '500px'}}>
@@ -129,4 +137,10 @@ const divCss = {
     )};
   };
 
+  const mapStateToProps = store =>({ processList: store.processList })
+  
+  const mapDispatchToProps = dispatch =>
+    bindActionCreators({ defineProcessList }, dispatch);
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(ProcessList);
 

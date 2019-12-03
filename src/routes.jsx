@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Header from './components/header';
 import HomePage from './pages/homePage';
 import ProcessList from './pages/processList';
+import Simulation from './pages/simulation';
 
 const routes = ({ props } = props ) => {
   return (
@@ -12,11 +13,15 @@ const routes = ({ props } = props ) => {
         <Route
           exact
           path='/'
-          component={() => <HomePage props={props}></HomePage>}
+          component={() => <HomePage props={props} />}
         />
         <Route
           path='/process-list'
-          component={() => <ProcessList props={props}></ProcessList>}
+          component={ ProcessList }
+        />
+        <Route
+          path='/simulation'
+          component={() => <Simulation props={props} />}
         />
       </Switch>
     </BrowserRouter>
