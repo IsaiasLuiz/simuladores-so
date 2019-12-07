@@ -5,25 +5,29 @@ const processList = [
         processName: 'A',
         processType: ProcessType.IO,
         processTime: '10',
-        processPriority: '1',
+        processPriority: '2',
+        processExecutionTime: 5
     },
     {
         processName: 'B',
         processType: ProcessType.CPU,
         processTime: '15',
-        processPriority: '3',
+        processPriority: '1',
+        processExecutionTime: 10
     },
     {
         processName: 'C',
         processType: ProcessType.IO,
         processTime: '10',
         processPriority: '7',
+        processExecutionTime: 7
     },
     {
         processName: 'D',
         processType: ProcessType.CPU,
         processTime: '20',
-        processPriority: '5',
+        processPriority: '3',
+        processExecutionTime: 3
     },
 ]
 

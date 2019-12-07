@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 const Table = styled.table`
     min-width: 100%;
     font-size: 1.4em;
+    overflow-y: scroll;
 `;
 
 const Tr = styled.tr`

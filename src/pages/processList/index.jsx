@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
 import ProcessTable from '../../components/processTable';
-import Next from '../../components/nextButton';
 import Button from '../../components/button';
 import { Container, Content, Title, Label } from '../../styles/styledComponents';
 import ProcessType from '../../constants/processType';
@@ -39,6 +38,7 @@ class ProcessList extends Component {
       processType: ProcessType.IO,
       processTime: '',
       processPriority: '',
+      processExecutionTime: '',
       processList:[]
     }
     addProcess = ()=> {          
@@ -47,7 +47,8 @@ class ProcessList extends Component {
         processName: this.state.processName,
         processType: this.state.processType,
         processTime: this.state.processTime,
-        processPriority: this.state.processPriority
+        processPriority: this.state.processPriority,
+        processExecutionTime: this.state.processExecutionTime
       }
       list.push(process);
       this.setState({processList: list});
@@ -59,7 +60,8 @@ class ProcessList extends Component {
         processName: '',
         processType: ProcessType.IO,
         processTime: '',
-        processPriority: ''
+        processPriority: '',
+        processExecutionTime: ''
       });
     };
 
@@ -74,7 +76,7 @@ class ProcessList extends Component {
           <Content>
             <Title>Configure a Lista de processos</Title>
             <H3>Escolha o tipo de processo:</H3>
-            <Label style={labelCss}>
+            <Label style={ labelCss }>
               <input
                 type='radio'
                 name='process-type'
@@ -83,7 +85,7 @@ class ProcessList extends Component {
               />
               IO
             </Label>
-            <Label style={labelCss}>
+            <Label style={ labelCss }>
               <input
                 type='radio'
                 name='process-type'
@@ -95,7 +97,7 @@ class ProcessList extends Component {
             <Div>
               <H3>Insira o nome do processo:</H3>
               <Input type="text" placeholder="Nome do processo" 
-              value={this.state.processName}
+              value={ this.state.processName }
                 onChange={(event)=>this.setState({processName: event.target.value})}
               />
             </Div>
@@ -103,7 +105,7 @@ class ProcessList extends Component {
             <Div>
               <H3>Insira o tempo em segundos:</H3>
               <Input type="number" placeholder="Tempo em segundos" 
-              value={this.state.processTime}
+              value={ this.state.processTime }
                 onChange={(event)=>this.setState({processTime: event.target.value})}
               />
             </Div>
@@ -111,26 +113,34 @@ class ProcessList extends Component {
             <Div>
               <H3>Insira a Prioridade</H3>
               <Input type="number" placeholder="Proridade" 
-              value={this.state.processPriority}
+              value={ this.state.processPriority }
                 onChange={(event)=>this.setState({processPriority: event.target.value})}
               />
             </Div>
 
-            <Div style={divCss}>
-              <Button text="Usar lista sugerida" click={this.processDefault}/>
-              <Button text="Adicionar" click={this.addProcess} />
+            <Div>
+              <H3>Insira o Tempo de Execução:</H3>
+              <Input type="number" placeholder="Tempo de execução" 
+              value={ this.state.processExecutionTime }
+                onChange={(event)=>this.setState({processExecutionTime: event.target.value})}
+              />
+            </Div>
+
+            <Div style={ divCss }>
+              <Button text="Usar lista sugerida" click={ this.processDefault }/>
+              <Button text="Adicionar" click={ this.addProcess } />
               <Button text="Finalizar" click={()=> {
                 defineProcessList(this.state.processList);
                 this.props.history.push('/simulation');
               }} 
-              background={"rgb(22, 231, 22)"}
+              background={ "rgb(22, 231, 22)" }
                 />
             </Div>
           </Content>
-          <Content style={{'justifyContent': 'end', 'minWidth': '500px'}}>
+          <Content style={ {'justifyContent': 'end', 'minWidth': '500px'} }>
             <Div>
               <H3>Lista de Processos:</H3>
-              <ProcessTable list={this.state.processList}/>
+              <ProcessTable list={ this.state.processList }/>
             </Div>
           </Content>
       </Container>
