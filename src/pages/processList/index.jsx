@@ -38,7 +38,7 @@ class ProcessList extends Component {
       processType: ProcessType.IO,
       processTime: '',
       processPriority: '',
-      processExecutionTime: '',
+      processExecutionTime: 5,
       processList:[]
     }
     addProcess = ()=> {          
@@ -66,7 +66,8 @@ class ProcessList extends Component {
     };
 
     processDefault = ()=> {
-      this.setState({processList: ProcessListDefault});
+      const list = [].concat(this.state.processList,ProcessListDefault);
+      this.setState({processList: list});
     }
 
     render(){
@@ -75,6 +76,7 @@ class ProcessList extends Component {
         <Container>
           <Content>
             <Title>Configure a Lista de processos</Title>
+            <Label>Tempo de execução para Round Robin de 5 segundos.</Label>
             <H3>Escolha o tipo de processo:</H3>
             <Label style={ labelCss }>
               <input
@@ -118,13 +120,13 @@ class ProcessList extends Component {
               />
             </Div>
 
-            <Div>
+            {/* <Div>
               <H3>Insira o Tempo de Execução:</H3>
               <Input type="number" placeholder="Tempo de execução" 
               value={ this.state.processExecutionTime }
                 onChange={(event)=>this.setState({processExecutionTime: event.target.value})}
               />
-            </Div>
+            </Div> */}
 
             <Div style={ divCss }>
               <Button text="Usar lista sugerida" click={ this.processDefault }/>

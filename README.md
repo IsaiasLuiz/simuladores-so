@@ -1,12 +1,12 @@
 This project was designed by Professor André Tarallo in the discipline of Operating Systems at the IFSP campus Araraquara. The work involves implementing process simulators in operating systems.
 
-When downloading the project run
+It is necessary to have NPM installed on the machine, when downloading the project run:
 
-### `npm install`
+### `sudo npm install`
 
 and after this
 
-### `npm start`
+### `sudo npm start`
 
 and the application will run locally in your web browser.
 

@@ -1,4 +1,4 @@
-const processaRoundRobin = (arrayProcessos, quantum) => {
+const roundRobin = (arrayProcessos, quantum) => {
 
 	let totalTime = 0;
 	
@@ -7,48 +7,51 @@ const processaRoundRobin = (arrayProcessos, quantum) => {
 	})
 	
     
-	let restanteQuantum = 0;
-	let arrayRetorno = [];
-	let elementoArrayRetorno = {
+	let remaningQuantum = 0;
+	let auxiliaryArray = [];
+	let elementAuxiliaryArray = {
 
 	};
 	
+	
 	while(totalTime > 0){
-		arrayProcessos.forEach(elemento =>{
-			if(elemento.processTime !== 0){
-				elementoArrayRetorno = elemento;
-				if(restanteQuantum === 0){
-					if(elemento.processTime < quantum){
-						elemento.processTime -= elemento.processTime ;
-						restanteQuantum = quantum - elemento.processTime;
-						totalTime = totalTime - elemento.processTime;
-						elementoArrayRetorno.processTime = elemento.processTime;
+		arrayProcessos.forEach(element => {
+			if(element.processTime !== 0){
+				elementAuxiliaryArray = element;
+				if(remaningQuantum === 0){
+					if(element.processTime < quantum){
+						element.processTime -= element.processTime ;
+						remaningQuantum = quantum - element.processTime;
+						totalTime = totalTime > element.processTime ? 0 : totalTime - element.processTime;
+						elementAuxiliaryArray.processTime = element.processTime;
 					}else{
-						elemento.processTime = elemento.processTime - quantum;
+						element.processTime = element.processTime - quantum;
 						totalTime = totalTime - quantum;
-						elementoArrayRetorno.processTime = elemento.processTime;
+						elementAuxiliaryArray.processTime = element.processTime;
 					}
 				}else{
-					if(elemento.processTime < restanteQuantum){
-						elemento.processTime -= elemento.processTime;
-						restanteQuantum = restanteQuantum - elemento.processTime;
-						totalTime = totalTime - elemento.processTime;
-						elementoArrayRetorno.processTime = elemento.processTime;
+					if(element.processTime < remaningQuantum){
+						element.processTime -= element.processTime;
+						remaningQuantum = remaningQuantum - element.processTime;
+						totalTime = totalTime > element.processTime ? 0 : totalTime - element.processTime;
+						elementAuxiliaryArray.processTime = element.processTime;
 					}else{
-						elemento.processTime = elemento.processTime - restanteQuantum;
-						totalTime = totalTime - restanteQuantum;
-						elementoArrayRetorno.processTime = elemento.processTime ;
+						element.processTime = element.processTime - remaningQuantum;
+						totalTime = totalTime - remaningQuantum;
+						elementAuxiliaryArray.processTime = element.processTime ;
 					}
 				}
 				
-				arrayRetorno.push(teste(elementoArrayRetorno, elementoArrayRetorno.processTime));	
+				auxiliaryArray.push(newProcess(elementAuxiliaryArray, elementAuxiliaryArray.processTime));	
 			}
 		})
+		
+
 	}
-    return arrayRetorno;
+    return auxiliaryArray;
 }
 
-const teste = (element, time) => {
+const newProcess = (element, time) => {
 	return {
 		processName: element.processName,
         processType: element.processType,
@@ -59,4 +62,4 @@ const teste = (element, time) => {
 	}
 }
 
-export default processaRoundRobin;
+export default roundRobin;

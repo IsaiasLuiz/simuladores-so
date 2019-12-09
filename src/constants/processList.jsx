@@ -13,21 +13,21 @@ const processList = [
         processType: ProcessType.CPU,
         processTime: '15',
         processPriority: '1',
-        processExecutionTime: 10
+        processExecutionTime: 5
     },
     {
         processName: 'C',
         processType: ProcessType.IO,
         processTime: '10',
         processPriority: '7',
-        processExecutionTime: 7
+        processExecutionTime: 5
     },
     {
         processName: 'D',
         processType: ProcessType.CPU,
         processTime: '20',
         processPriority: '3',
-        processExecutionTime: 3
+        processExecutionTime: 5
     },
 ]
 

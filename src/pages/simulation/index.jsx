@@ -98,7 +98,7 @@ class Simulation extends Component {
                             ))}        
                         </Table>
                     </div>
-                    <ButtonRedirect click={ this.redirect } text="Página Inicial" />
+                    <ButtonRedirect background={ "rgb(22, 231, 22)" } click={ this.redirect } text="Página Inicial" />
                 </Content>
             </Container>
         )
